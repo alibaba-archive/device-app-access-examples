@@ -1,0 +1,42 @@
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: utf-8
+  context-path: /
+
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+    # mode: HTML5, LEGACYHTML5会关闭对HTML标记闭合的检查
+    mode: LEGACYHTML5
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+# 热部署,还需将IDEA的compile的auto make设置为true
+  devtools:
+    restart:
+      enabled: true
+
+logging:
+  level:
+    com.aliyun: debug
+
+# iot SDK 配置
+iotenv:
+  appkey: xxx
+  appsecret: xxx
+  deviceVersion: 0.2.0
+  host: api.citylink.aliplus.com
+
+# 主动推送配置
+msgenv:
+  consumerId: xxx
+  accessKey: xxx
+  secretKey: xxx
+  consumeThreadNums: 2
+  topic: xxx
+  ONSAddr: xxx

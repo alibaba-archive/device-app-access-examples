@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+    <body class="cm-no-transition cm-1-navbar">
+        <div id="cm-menu" th:fragment="menu">
+            <nav class="cm-navbar cm-navbar-primary">
+                <div class="cm-flex"><a href="index.html" class="cm-logo"></a></div>
+                <div class="btn btn-primary md-menu-white" data-toggle="cm-menu"></div>
+            </nav>
+            <div id="cm-menu-content">
+                <div id="cm-menu-items-wrapper">
+                    <div id="cm-menu-scroller">
+                        <ul class="cm-menu-items">
+                            <li class="active"><a href="index.html" class="sf-house">Home</a></li>
+                            <li><a href="/device/overview" class="sf-notepad">设备信息</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

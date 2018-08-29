@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-clearmin.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/roboto.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/material-design.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/small-n-flat.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}">
+        <title>Clearmin template</title>
+    </head>
+    <body class="cm-no-transition cm-2-navbar">
+        <!-- 菜单 -->
+        <div th:replace="common/menu :: menu"></div>
+        <header th:replace="common/header :: header"></header>
+        <div id="global">
+            <style>.demo hr{margin:30px 0}</style>
+            <div class="container-fluid">
+                <div class="panel panel-default demo">
+                    <div class="panel-body">
+                        <h4>监控数据</h4>
+                        <ul id="myTab" class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#propertyDiv" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">属性&服务</a></li>
+                            <li role="presentation" class=""><a href="#eventDiv" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">事件</a></li>
+                        </ul>
+                        <br>
+                        <div id="myTabContent" class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade active in" id="propertyDiv" aria-labelledby="home-tab">
+                                <h4>属性</h4>
+                                <div class="row cm-fix-height" id="propertyList">
+
+                                </div>
+                                <hr>
+                                <h4>服务</h4>
+                                <div class="row cm-fix-height" id="serviceList">
+
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="eventDiv" aria-labelledby="profile-tab">
+                                <h4>事件</h4>
+                                <div class="row cm-fix-height" id="eventList">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer th:replace="common/footer :: footer"></footer>
+        </div>
+        <script th:src="@{/js/lib/jquery-2.1.3.min.js}"></script>
+        <script th:src="@{/js/jquery.mousewheel.min.js}"></script>
+        <script th:src="@{/js/jquery.cookie.min.js}"></script>
+        <script th:src="@{/js/fastclick.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/clearmin.min.js}"></script>
+
+        <!-- WebSocket方式 -->
+        <script>
+            var socket;
+            if(typeof(WebSocket) == "undefined") {
+                console.log("浏览器不支持WebSocket...");
+            } else {
+                socket = new WebSocket("ws://localhost:8080/websocket");
+                //打开
+                socket.onopen = function() {
+                    console.log("Socket打开");
+                    //socket.send("这是来自客户端的消息" + location.href + new Date());
+                };
+
+                //收到消息
+                socket.onmessage = function(msg) {
+                    console.log(msg.data);
+                };
+
+                //关闭
+                socket.onclose = function() {
+                    console.log("Socket关闭");
+                };
+
+                //发生了错误事件
+                socket.onerror = function() {
+                    alert("Socket发生了错误");
+                };
+
+                $(window).unload(function(){
+                    socket.close();
+                });
+            }
+        </script>
+    </body>
+</html>
